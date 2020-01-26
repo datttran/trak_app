@@ -9,5 +9,8 @@ A Crytocurrency price tracker app build with Flutter and Dart.
 3. Run `flutter run` (make sure to have an emulator running).
 
 ## Recent changes
-- Replace the old cryto cards with the trending Neumorphism (Soft UI) style. 
-- Rewrite the code to work with the new API from Nomics.
+## Todo
+
+- [ ] Use local currency icons instead the network icons from Nomics.
+- [ ] Add "Add card" card to add more cryptocurrency to the watch list.
+- [ ] Style the graph to match the soft UI theme.
