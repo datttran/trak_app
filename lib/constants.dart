@@ -1,11 +1,16 @@
 import 'cryto.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
+import 'package:trak/Price.dart';
 
 
 
 final apiKey = '62318fc11614e681fbfcc5f8d474d56e';
 var data;
+var sparkLineData;
+List timestamps = [];
+List prices = [];
+List<Price> dataTable = [];
 String keyIds = 'BTC,ETH,XMR,USDT,EOS,LTC,DASH';
 List<String> ids = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
 List<Crypto> currencies = [];

@@ -1,8 +1,8 @@
+import 'package:day/day.dart';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:trak/3DBlockBuilder.dart';
-import 'package:trak/cryto.dart';
+
 import 'package:trak/methods.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trak/Price.dart';
@@ -36,20 +36,22 @@ class _PriceScreenState extends State<PriceScreen> {
   void initState()  {
     // TODO: implement initState
     super.initState();
+    createPriceTable();
+    print(dataTable);
+
 
 
 
     //TODO: make auto create card for display
-
-
-
-
-
-
-
-
   }
 
+
+void createPriceTable(){
+    for(int i = 0; i < timestamps.length; i ++ ){
+      dataTable.add(null);
+      dataTable[i] = Price(Day.fromString(sparkLineData[0]['timestamps'][i]).format('MMMM DD'), double.parse(prices[i]).round());
+    }
+  }
 
 
 
@@ -118,33 +120,29 @@ class _PriceScreenState extends State<PriceScreen> {
               height: verticalPixel * 50,
               width: double.infinity,
               //color: Color(0xff040405),
-            child: SfCartesianChart(
+            child: Center(
+              child: SfCartesianChart(
 
-              margin: EdgeInsets.all(30),
-
-
-
-              primaryXAxis: CategoryAxis(),
-              series: <ChartSeries>[
-
-                AreaSeries<Price, String>(
-
-                  gradient: LinearGradient(colors: colors, stops: stops),
-
-                  dataSource: [
-                    Price('Jan', 20),
-                    Price('Feb',11),
-                    Price('Mar', 12),
-                    Price('Apr',9),
-                    Price('May', 10)
-                  ],
+                margin: EdgeInsets.only(top: 20),
 
 
-                  xValueMapper: (Price price, _) => price.time,
-                  yValueMapper: (Price price, _) => price.price,
 
-                )
-              ]
+                primaryXAxis: CategoryAxis(),
+                series: <ChartSeries>[
+
+                  AreaSeries<Price, String>(
+
+                    gradient: LinearGradient(colors: colors, stops: stops),
+
+                    dataSource:dataTable,
+
+
+                    xValueMapper: (Price price, _) => price.timestamps,
+                    yValueMapper: (Price price, _) => price.prices,
+
+                  )
+                ]
+              ),
             ),
 
           ),
@@ -198,6 +196,12 @@ class _PriceScreenState extends State<PriceScreen> {
             color: Colors.black,
 
           ),
+          Container(
+            height: 2000,
+            color: Colors.blueAccent,
+             child: Text('SUCK'),
+             //Text(sparkLineData[0]['timestamps'][0] + sparkLineData[0]['prices'][0]),
+          )
           // CRYPTO TYPE
         ],
       ),

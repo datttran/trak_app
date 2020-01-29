@@ -4,7 +4,6 @@ import 'constants.dart';
 import 'size_config.dart';
 import 'package:trak/circleBuilder.dart';
 import 'methods.dart';
-import 'loading_screen.dart';
 
 
 
