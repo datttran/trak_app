@@ -1,6 +1,6 @@
 # Trak
 
-A Crytocurrency price tracker app build with Flutter and Dart.
+A Cryptocurrency price tracker app build with Flutter and Dart.
 
 ## Getting Started
 
