@@ -120,6 +120,8 @@ class _PriceScreenState extends State<PriceScreen> {
 
             child: Center(
               child: SfCartesianChart(
+                zoomPanBehavior: zoomingBehavior,
+
 
                 margin: EdgeInsets.only(top: 20),
 
@@ -129,6 +131,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 series: <ChartSeries>[
 
                   AreaSeries<Price, String>(
+
 
                     gradient: LinearGradient(colors: colors, stops: stops),
 
