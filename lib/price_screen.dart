@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:trak/3DBlockBuilder.dart';
 import 'package:trak/methods.dart';
@@ -10,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'constants.dart';
 import 'dart:async';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-
+import 'package:day/day.dart';
 
 
 
@@ -24,33 +23,18 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   Timer timer;
+
+
   @override
   void initState()  {
     // TODO: implement initState
     super.initState();
-
-
-
   }
 
 
-//void createPriceTable(){
-//    for(int i = 0; i < timestamps.length; i ++ ){
-//      dataTable.add(null);
-//      dataTable[i] = Price(Day.fromString(sparkLineData[0]['timestamps'][i]).format('MMMM DD'), double.parse(prices[i]));
-//    }
-//  } //Create price table for plotting//
-
-  reloadGraph() async{
-    int i = onoff.indexOf(0);
-    String id = currencies[i].toString();
-    await getSparkLineData(id);
-    //createPriceTable();
-    //print(dataTable);
 
 
 
-  }
 
 
 
@@ -93,20 +77,7 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
 
-            //Icon(Icons.first_page , color: Colors.white, size: 50, ),
-//            Text(
-//
-//              'The Crypto Tracker ',
-//
-//              style: TextStyle(
-//
-//
-//                  fontSize: verticalPixel*2,
-//                  fontFamily: 'Lobster',
-//                  fontWeight: FontWeight.normal),
-//              textAlign: TextAlign.end,
-//
-//            ),
+
           ],
         ),
       ),
@@ -114,39 +85,104 @@ class _PriceScreenState extends State<PriceScreen> {
       body: ListView(
         children: <Widget>[
           Container(
+            margin: EdgeInsets.only(top: verticalPixel*2),
+            child: Stack(
+              overflow: Overflow.visible,
+              alignment: AlignmentDirectional.topCenter,
 
-              height: verticalPixel * 50,
-              width: double.infinity,
+              children: <Widget>[
 
-            child: Center(
-              child: SfCartesianChart(
-                zoomPanBehavior: zoomingBehavior,
+                Container(
 
+                  //height: verticalPixel*25,
+                  //width: verticalPixel*19 ,
+                  margin: EdgeInsets.symmetric(horizontal: verticalPixel*1),
 
-                margin: EdgeInsets.only(top: 20),
+                  decoration: BoxDecoration(
 
-
-
-                primaryXAxis: CategoryAxis(),
-                series: <ChartSeries>[
-
-                  AreaSeries<Price, String>(
-
-
-                    gradient: LinearGradient(colors: colors, stops: stops),
-
-                    dataSource: wholeDataTable[onoff.indexOf(0)],//[Price('Mon', 1), Price( 'Sun' , 1)], // <- Data for the graph goes here as a list of Price points.
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[400].withOpacity(1),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                          offset: Offset(0,0),
+                        ),
 
 
-                    xValueMapper: (Price price, _) => price.timestamps,
-                    yValueMapper: (Price price, _) => price.prices,
+                        BoxShadow(
+                          color: Colors.white70,
+                          blurRadius: 5,
+                          spreadRadius: 4,
+                          offset: Offset(-1,-1),
 
-                  )
-                ]
-              ),
-            ),
 
-          ), // The Graph
+                        )],
+
+                      //border: Border.all(color: Colors.white, width: 1),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.grey[300], Colors.white],
+                          stops: [.7,1]),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child: Container(
+                    padding: EdgeInsets.all(verticalPixel*1.5),
+
+                    child: Center(
+                      child: SfCartesianChart(
+                          zoomPanBehavior: zoomingBehavior,
+
+
+
+
+                          margin: EdgeInsets.only(top: 20),
+
+
+
+                          primaryXAxis: CategoryAxis(
+                              interactiveTooltip: InteractiveTooltip(
+                                enable: true,
+                              )
+                          ),
+                          primaryYAxis: NumericAxis(
+
+                            labelFormat: labelFormat,
+                          ),
+                          crosshairBehavior: CrosshairBehavior(
+                            enable: true,
+                            //hideDelay: 1000,
+
+                            activationMode: ActivationMode.singleTap,
+                            shouldAlwaysShow: true,
+                          ),
+                          series: <ChartSeries>[
+
+                            AreaSeries<Price, String>(
+
+
+                              gradient: LinearGradient(colors: colors, stops: stops),
+
+                              dataSource: wholeDataTable[onoff.indexOf(0)],// <- Data for the graph goes here as a list of Price points. //
+
+
+                              xValueMapper: (Price price, _) => price.timestamps,
+                              yValueMapper: (Price price, _) => price.prices,
+
+                            )
+                          ]
+                      ),
+                    ),
+                  ),
+
+
+
+
+                ),
+
+              ],),
+          ),
+
+           // The Graph
           Container(
             height: verticalPixel*5,
             child: SvgPicture.network('https://www.svgrepo.com/show/124304/three-dots.svg'),
@@ -168,7 +204,6 @@ class _PriceScreenState extends State<PriceScreen> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-
                 for(int i = 0; i <currencies.length ; i+= 1) GestureDetector(
                   onTap: (){
                     setState(() {
@@ -176,21 +211,17 @@ class _PriceScreenState extends State<PriceScreen> {
                         int a = onoff[onoff.indexOf(0)];
                         onoff[onoff.indexOf(0)] = 1;
                         onoff[i] = a;
-                        print(onoff);
                       }
                       else{
                         onoff[i] = 0;
-                        print(onoff);
                       }
                     });
-
-
-
-
-
+                    checkLabelFormat(ids[i]);
                   },
+
                     child: buildContainer(child: currencies[i].buildCard(), colors: color[onoff[i]])),
                 buildEmptyCard(),
+
 
               ],
 
@@ -200,6 +231,14 @@ class _PriceScreenState extends State<PriceScreen> {
             height: verticalPixel * 10,
             width: double.infinity,
             color: Colors.black,
+            child: FloatingActionButton(
+              backgroundColor: Colors.black,
+              child: Icon(Icons.call_to_action, size: 30,),
+              onPressed: (){
+                print(1);
+
+              },
+            ),
 
           ),// Divider
           Container(

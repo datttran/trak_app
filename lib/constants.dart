@@ -1,16 +1,16 @@
 import 'cryto.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
-import 'package:trak/Price.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:day/day.dart';
 
-
-
+final currentTime = Day().toIso8601String().substring(0,10);
 final apiKey = '62318fc11614e681fbfcc5f8d474d56e';
 var data;
 var sparkLineData;
 List timestamps = [];
 List prices = [];
-List<Price> dataTable = [];
+
 String keyIds = 'BTC,ETH,XMR,USDT,EOS,LTC,DASH';
 List<String> ids = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
 List<Crypto> currencies = [];
@@ -34,7 +34,16 @@ List color= [ Colors.redAccent, Colors.grey[400]];
 
 
 
-final List<Color> colors = <Color>[Color(0xff2A2B3C).withOpacity(.8), Color(0xff2A2B3C) , Color(0xff040405)];
+final List<Color> colors = <Color>[Color(0xff2A2B3C), Color(0xff16171E) , Color(0xff040405)];
 
 final List<double> stops = <double>[0 , 0.5, 1];
+
+
+
+ZoomPanBehavior zoomingBehavior = ZoomPanBehavior(
+enablePinching: true, zoomMode: ZoomMode.x, enablePanning: true);
+String labelFormat = labelMap[ids[0]] ;
+
+Map labelMap = {'BTC' : '\${value}K' , 'ETH': '\${value}','XMR': '\${value}','USDT': '\${value}','EOS': '\${value}','LTC': '\${value}','DASH' : '\${value}'};
+
 
