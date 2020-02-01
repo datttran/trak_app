@@ -9,6 +9,7 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 3. Run `flutter run` (make sure to have an emulator running).
 
 ## Recent changes
+- Add pinch zooming to graph.
 ## Todo
 
 - [ ] Use local currency icons instead the network icons from Nomics.
