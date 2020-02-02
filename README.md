@@ -2,6 +2,8 @@
 
 A Cryptocurrency price tracker app build with Flutter and Dart.
 
+![](images/image.png)
+
 ## Getting Started
 
 1. Install [Flutter](https://flutter.io)
@@ -12,8 +14,8 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 
 ## Recent changes
 - Add pinch zooming to the graph.
-- Add auto format axis lable base on feeded in data.
-- Add crosshair to the graph.
+- Add auto format axis label base on data.
+- Add crosshair tool to the graph.
 - Update UI.
 ## Known issues
 - The animation when changing between graphs stop working after zoom in.

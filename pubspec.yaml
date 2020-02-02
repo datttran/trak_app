@@ -43,6 +43,7 @@ flutter:
       fonts:
         - asset: fonts/Righteous-Regular.ttf
 
+
   uses-material-design: true
 
 
