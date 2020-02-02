@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trak/loading_screen.dart';
+import 'package:trak/pages/loading_screen.dart';
 
 
 //import 'package:device_simulator/device_simulator.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:trak/3DBlockBuilder.dart';
+import 'package:trak/buildMethods/3DBlockBuilder.dart';
 import 'size_config.dart';
 import 'package:http/http.dart';
-import 'constants.dart';
+import '../data/constants.dart';
 import 'dart:convert';
 import 'package:day/day.dart';
-import 'Price.dart';
-import 'dart:math';
+import '../classes/Price.dart';
+
 
 
 buildPriceChange({String price, String duration}){
@@ -14,11 +14,13 @@ buildPriceChange({String price, String duration}){
   if( price.contains('-') == true){
     arrow = Icon(Icons.arrow_drop_down, color: Colors.redAccent,
       size: verticalPixel * 2.5,);
+    price = '-' + '\$' + price.substring(1,price.length);
   }
 
   else{
     arrow = Icon(Icons.arrow_drop_up, color: Colors.greenAccent,
       size: verticalPixel * 2.5,);
+    price = '\$' +  price;
   }
 
   return Row(
@@ -36,7 +38,7 @@ buildPriceChange({String price, String duration}){
 
 
 
-      Text(price,
+      Text( price,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: verticalPixel * 1.5,

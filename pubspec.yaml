@@ -36,6 +36,12 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/Lobster-Regular.ttf
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu-Regular.ttf
+    - family: Righteous
+      fonts:
+        - asset: fonts/Righteous-Regular.ttf
 
   uses-material-design: true
 

@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'methods.dart';
+import '../buildMethods/methods.dart';
 
-import 'package:trak/price_screen.dart';
-import 'constants.dart';
+import 'package:trak/pages/price_screen.dart';
+import '../data/constants.dart';
 import 'package:http/http.dart';
 import 'package:flutter/material.dart';
-import 'cryto.dart';
+import '../classes/cryto.dart';
 
 
 

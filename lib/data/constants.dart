@@ -1,4 +1,4 @@
-import 'cryto.dart';
+import '../classes/cryto.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -27,7 +27,9 @@ List<Crypto> test  = [btc, eth];
 
 List<bool>  isSelected = [true, false, false,false, false,false, false,false]; // this always need to be equal to the number of cards
 
-
+var showing = onoff.indexOf(0);
+var showingID = currencies[showing].idToName();
+var showingRank = currencies[showing].showRank();
 List onoff = [0,1,1,1,1,1,1,1,1];
 List color= [ Colors.redAccent, Colors.grey[400]];
 

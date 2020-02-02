@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'size_config.dart';
-import 'package:trak/circleBuilder.dart';
-import 'methods.dart';
+import '../data/constants.dart';
+import '../buildMethods/size_config.dart';
+import 'package:trak/buildMethods/circleBuilder.dart';
+import '../buildMethods/methods.dart';
 
 
 
 class Crypto {
+  String rank;
   String name;
   String id;
   String icon;
@@ -26,11 +27,23 @@ class Crypto {
     getName(num);
     getIcon(num);
     getId(num);
+    getRank(num);
+  }
+  void getRank(num){
+    rank = data[num]['rank'];
+  }
+
+  String showRank(){
+    return rank;
   }
 
   String toString(){
     return id;
   }
+  String idToName(){
+    return name;
+  }
+
   void getId(num){
     id = data[num]['id'];
   }
@@ -118,7 +131,7 @@ class Crypto {
                     ),
                   ),
 
-                  Text(price.toString(),
+                  Text('\$' + price.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: verticalPixel * 1.5,
