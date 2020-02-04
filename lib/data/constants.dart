@@ -32,9 +32,17 @@ var showingID = currencies[showing].idToName();
 var showingRank = currencies[showing].showRank();
 List onoff = [0,1,1,1,1,1,1,1,1];
 List color= [ Colors.redAccent, Colors.grey[400]];
+List<DropdownMenuItem> convert = [
+  DropdownMenuItem(
+  child: Text('USD'),
+  value: 'USD',
+),
+  DropdownMenuItem(
+    child: Text('EUR'),
+    value: 'EUR',
+  ),];
 
-
-
+String selectedCurrency = 'USD';
 
 final List<Color> colors = <Color>[Color(0xff2A2B3C), Color(0xff16171E) , Color(0xff040405)];
 

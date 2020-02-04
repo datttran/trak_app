@@ -6,7 +6,7 @@ import '../data/constants.dart';
 import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 import '../classes/cryto.dart';
-
+import 'package:trak/buildMethods/3DBlockBuilder.dart';
 
 
 class LoadingScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
   void getData() async{
-    Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d');
+    Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d&convert=$selectedCurrency');
 
     data = jsonDecode(response.body);
 
@@ -76,6 +76,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Stack(
           children: <Widget>[
 

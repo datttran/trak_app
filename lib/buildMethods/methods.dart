@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:trak/buildMethods/3DBlockBuilder.dart';
+import 'package:trak/classes/cryto.dart';
 import 'size_config.dart';
 import 'package:http/http.dart';
 import '../data/constants.dart';
 import 'dart:convert';
 import 'package:day/day.dart';
 import '../classes/Price.dart';
+import 'package:crypto/crypto.dart';
+
+getDataUpdate() async{
+  Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d&convert=$selectedCurrency');
+
+  data = jsonDecode(response.body);
+
+
+  //print(data);
+
+
+
+  }
+
+
+
 
 
 
@@ -115,3 +132,5 @@ buildDataTables() async{
 void checkLabelFormat(String id){
   labelFormat = labelMap[id];
 }
+
+

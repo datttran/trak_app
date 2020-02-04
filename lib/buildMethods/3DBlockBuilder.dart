@@ -38,7 +38,7 @@ Widget buildContainer({child , Color colors}) {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomCenter,
                 colors: [Colors.grey[300], Colors.white],
-                stops: [.1,.9]),
+                stops: [0,1]),
             borderRadius: BorderRadius.all(Radius.circular(35))),
         child: child,
 
@@ -57,8 +57,8 @@ Widget buildContainer({child , Color colors}) {
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomCenter,
-                  colors: [ colors, colors.withOpacity(.9),colors.withOpacity(.7),],
-                  stops: [.5,.8,1]),
+                  colors: [ colors, colors.withOpacity(.9)],
+                  stops: [.5,1]),
 
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))
             )

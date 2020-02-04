@@ -42,7 +42,9 @@ flutter:
     - family: Righteous
       fonts:
         - asset: fonts/Righteous-Regular.ttf
-
+    - family: Sarp
+      fonts:
+        - asset: fonts/Sarpanch-Regular.ttf
 
   uses-material-design: true
 
