@@ -41,7 +41,7 @@ List<DropdownMenuItem> convert = [
     child: Text('EUR'),
     value: 'EUR',
   ),];
-
+List<String> currencyOptions = ['USD', 'EUR', "GBP"];
 String selectedCurrency = 'USD';
 
 final List<Color> colors = <Color>[Color(0xff2A2B3C), Color(0xff16171E) , Color(0xff040405)];

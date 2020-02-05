@@ -4,6 +4,7 @@ import 'package:trak/buildMethods/3DBlockBuilder.dart';
 import 'package:trak/buildMethods/methods.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trak/classes/Price.dart';
+import 'package:trak/pages/currencypicker.dart';
 import '../buildMethods/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +14,6 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:flutter/services.dart';
 import 'loading_screen.dart';
 import 'package:crypto/crypto.dart';
-
 
 class PriceScreen extends StatefulWidget {
   final data;
@@ -119,12 +119,12 @@ class _PriceScreenState extends State<PriceScreen> {
                     child: Text(
                       'T r a k',
                       style: TextStyle(
-                          color: Colors.grey[200], //Color(0xffbac4d2),
+                        color: Colors.grey[200], //Color(0xffbac4d2),
 
-                          fontSize: verticalPixel * 4,
-                          fontWeight: FontWeight.w200,
-                          fontFamily: 'Righteous',
-                          ),
+                        fontSize: verticalPixel * 4,
+                        fontWeight: FontWeight.w200,
+                        fontFamily: 'Righteous',
+                      ),
                     ),
                   ),
                 ),
@@ -390,46 +390,81 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ), // Info cards
           //Convert
-          Container(
 
-
-            height: 150,
-            child: CupertinoPicker(
-              backgroundColor: Colors.grey[200],
-              onSelectedItemChanged: (value){
-                print(value);
-              },
-              children: <Widget>[
-                Text('USD'),
-                Text('EUR'),
-                Text('GBP'),
-
-              ],
-              itemExtent: verticalPixel*5,
-            ),
-          ),
           Container(
             height: verticalPixel * 10,
+
             width: double.infinity,
             //color: Colors.black,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                RaisedButton(
+
+
+
+                  onPressed: () {
+                    setState(() {
+                      selectedCurrency = 'USD';
+                    });
+                    showCupertinoModalPopup(
+                        context: context,
+                        builder: (BuildContext context) => Container(
+
+                      height: verticalPixel*19,
+                      child: CupertinoPicker(
+                        looping: true,
+                        useMagnifier: true,
+
+                        backgroundColor: Colors.grey[200],
+                        onSelectedItemChanged: (value){
+
+                          if (mounted) {
+                            setState(() {
+                              selectedCurrency = currencyOptions[value];
+                            });
+                          }
+
+
+                        },
+                        children: <Widget>[
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text('USD'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text('EUR'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text('GBP'),
+                          ),
+
+
+                        ],
+                        itemExtent: verticalPixel*6,
+                      ),
+                    ));
+                  },
+                child: Text(selectedCurrency),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+
+                  ),
+                ),
                 Theme(
                   data:
-                  Theme.of(context).copyWith(brightness: Brightness.light),
+                      Theme.of(context).copyWith(brightness: Brightness.light),
                   child: Padding(
                     padding:
-                    EdgeInsets.symmetric(horizontal: verticalPixel * 2),
+                        EdgeInsets.symmetric(horizontal: verticalPixel * 2),
                     child: null,
                   ),
                 ), //Dropdown menu
                 GestureDetector(
-                  onTap: () async {
-                    await getDataUpdate();
-
-
-                  },
+                  onTap: () async {},
                   child: Container(
                     height: verticalPixel * 4,
                     margin: EdgeInsets.symmetric(horizontal: verticalPixel * 2),
@@ -466,28 +501,26 @@ class _PriceScreenState extends State<PriceScreen> {
                     //height: verticalPixel*12,
                     child: Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: Padding(
-                            padding:
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Padding(
+                        padding:
                             EdgeInsets.symmetric(horizontal: verticalPixel * 3),
-                            child: Text(
-                              'Convert',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          ),
-                        )),
+                        child: Text(
+                          'Convert',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Ubuntu',
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    )),
                   ),
-
                 ),
 
                 //Convert button
               ],
             ),
-
-          ),// Dropdown
+          ), // Dropdown
 //          Container(
 //            height: 2000,
 //            color: Colors.blueAccent,
@@ -500,5 +533,3 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 }
-
-

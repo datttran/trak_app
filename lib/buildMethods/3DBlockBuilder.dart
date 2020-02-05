@@ -11,7 +11,7 @@ Widget buildContainer({child , Color colors}) {
     children: <Widget>[
 
       Container(
-        height: verticalPixel*25,
+        height: verticalPixel*24,
         width: verticalPixel*19 ,
         margin: EdgeInsets.symmetric(horizontal: verticalPixel*1),
         decoration: BoxDecoration(
@@ -39,7 +39,7 @@ Widget buildContainer({child , Color colors}) {
                 end: Alignment.bottomCenter,
                 colors: [Colors.grey[300], Colors.white],
                 stops: [0,1]),
-            borderRadius: BorderRadius.all(Radius.circular(35))),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
         child: child,
 
 
