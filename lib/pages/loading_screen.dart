@@ -30,7 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
   void getData() async{
-    Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d&convert=$selectedCurrency');
+    Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d');
 
     data = jsonDecode(response.body);
 

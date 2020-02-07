@@ -10,8 +10,9 @@ var data;
 var sparkLineData;
 List timestamps = [];
 List prices = [];
-
+var dataUpdate;
 String keyIds = 'BTC,ETH,XMR,USDT,EOS,LTC,DASH';
+String converts = 'USD,EUR,GBP';
 List<String> ids = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
 List<Crypto> currencies = [];
 List cards = [];

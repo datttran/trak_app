@@ -9,13 +9,23 @@ import 'package:day/day.dart';
 import '../classes/Price.dart';
 import 'package:crypto/crypto.dart';
 
-getDataUpdate() async{
+getDataUpdate(String selectedCurrency) async{
   Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d&convert=$selectedCurrency');
 
   data = jsonDecode(response.body);
 
+  for (int i = 0; i < ids.length; i += 1){
 
-  //print(data);
+
+    Crypto holder = new Crypto(id: ids[i]);
+    holder.getInfo(i);
+
+    currencies[i]= holder;
+    //print(holder.name +  holder.price + holder.convert);
+
+
+  }
+
 
 
 

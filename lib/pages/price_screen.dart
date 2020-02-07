@@ -4,6 +4,7 @@ import 'package:trak/buildMethods/3DBlockBuilder.dart';
 import 'package:trak/buildMethods/methods.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trak/classes/Price.dart';
+import 'package:trak/classes/cryto.dart';
 import 'package:trak/pages/currencypicker.dart';
 import '../buildMethods/size_config.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,32 @@ class _PriceScreenState extends State<PriceScreen> {
       time = Day().format('hh:mm').toString();
     });
   }
+  List xCards(){
 
+    return <Widget>[
+      for (int i = 0; i < currencies.length; i += 1)
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                if (onoff[i] == 1) {
+                  int a = onoff[onoff.indexOf(0)];
+                  onoff[onoff.indexOf(0)] = 1;
+                  onoff[i] = a;
+                } else {
+                  onoff[i] = 0;
+                }
+                showing = onoff.indexOf(0);
+                showingID = currencies[showing].idToName();
+                showingRank = currencies[showing].showRank();
+              });
+              checkLabelFormat(ids[i]);
+            },
+            child: buildContainer(
+                child: currencies[i].buildCard(),
+                colors: color[onoff[i]])),
+      buildEmptyCard(),
+    ];
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -151,7 +177,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 ),
               ],
             ),
-          ),
+          ),//TRAK LOGO
           Container(
             margin: EdgeInsets.only(
                 top: verticalPixel * 3,
@@ -341,15 +367,13 @@ class _PriceScreenState extends State<PriceScreen> {
                 //SizedBox(width: verticalPixel*2,),
               ],
             ),
-          ),
-
+          ),//Graph title
           Container(
             margin: EdgeInsets.symmetric(vertical: verticalPixel * 1),
             height: verticalPixel * 5,
             child: SvgPicture.network(
                 'https://www.svgrepo.com/show/124304/three-dots.svg'),
           ), // three dots in the middle
-
           Container(
             //padding: EdgeInsets.symmetric(vertical: 10),
             //margin: EdgeInsets.symmetric(vertical: verticalPixel*1),
@@ -363,32 +387,10 @@ class _PriceScreenState extends State<PriceScreen> {
             //width: double.infinity,
             //color: Colors.grey,
             child: ListView(
+              addAutomaticKeepAlives: true,
               scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                for (int i = 0; i < currencies.length; i += 1)
-                  GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (onoff[i] == 1) {
-                            int a = onoff[onoff.indexOf(0)];
-                            onoff[onoff.indexOf(0)] = 1;
-                            onoff[i] = a;
-                          } else {
-                            onoff[i] = 0;
-                          }
-                          showing = onoff.indexOf(0);
-                          showingID = currencies[showing].idToName();
-                          showingRank = currencies[showing].showRank();
-                        });
-                        checkLabelFormat(ids[i]);
-                      },
-                      child: buildContainer(
-                          child: currencies[i].buildCard(),
-                          colors: color[onoff[i]])),
-                buildEmptyCard(),
-              ],
-            ),
-          ), // Info cards
+              children: xCards()
+            ),), // Info cards
           //Convert
 
           Container(
@@ -404,49 +406,70 @@ class _PriceScreenState extends State<PriceScreen> {
 
 
                   onPressed: () {
-                    setState(() {
-                      selectedCurrency = 'USD';
-                    });
-                    showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) => Container(
-
-                      height: verticalPixel*19,
-                      child: CupertinoPicker(
-                        looping: true,
-                        useMagnifier: true,
-
-                        backgroundColor: Colors.grey[200],
-                        onSelectedItemChanged: (value){
-
-                          if (mounted) {
-                            setState(() {
-                              selectedCurrency = currencyOptions[value];
-                            });
-                          }
 
 
-                        },
-                        children: <Widget>[
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (BuildContext context) {
+                            FixedExtentScrollController scoldController = FixedExtentScrollController(initialItem: currencyOptions.indexOf(selectedCurrency));
+                            
+                            return Container(
 
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text('USD'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text('EUR'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text('GBP'),
-                          ),
+                            height: verticalPixel*19,
+                            child: CupertinoPicker(
+                              scrollController: scoldController,
+                              looping: true,
+                              useMagnifier: true,
+
+                              backgroundColor: Colors.grey[200],
+                              onSelectedItemChanged: (value){
+                                selectedCurrency = currencyOptions[value];
 
 
-                        ],
-                        itemExtent: verticalPixel*6,
-                      ),
-                    ));
+
+
+
+
+
+                                  getDataUpdate(currencyOptions[value]);
+
+
+
+
+
+
+
+                                  //print(selectedCurrency + currencies[0].price);
+
+
+
+
+
+
+
+                              },
+                              children: <Widget>[
+
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text('USD'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text('EUR'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text('GBP'),
+                                ),
+
+
+                              ],
+                              itemExtent: verticalPixel*6,
+                            ),
+                          );});
+                    
+
                   },
                 child: Text(selectedCurrency),
                   shape: RoundedRectangleBorder(
@@ -464,7 +487,13 @@ class _PriceScreenState extends State<PriceScreen> {
                   ),
                 ), //Dropdown menu
                 GestureDetector(
-                  onTap: () async {},
+                  onTap: () {
+                    setState(() {
+                      data = data;
+                    });
+                    print('done');
+
+                  },
                   child: Container(
                     height: verticalPixel * 4,
                     margin: EdgeInsets.symmetric(horizontal: verticalPixel * 2),
