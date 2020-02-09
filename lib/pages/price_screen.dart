@@ -422,34 +422,11 @@ class _PriceScreenState extends State<PriceScreen> {
 
                               backgroundColor: Colors.grey[200],
                               onSelectedItemChanged: (value){
-
                                 setState(() {
                                   selectedCurrency = currencyOptions[value];
                                 });
-
-
-
-
-
-
-
-
                                 getDataUpdate(currencyOptions[value]);
-
-
-
-
-
-
-
-                                //print(selectedCurrency + currencies[0].price);
-
-
-
-
-
-
-
+                               //print(selectedCurrency + currencies[0].price);
                               },
                               children: <Widget>[
 
@@ -594,7 +571,7 @@ class _PriceScreenState extends State<PriceScreen> {
                       Theme.of(context).copyWith(brightness: Brightness.light),
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: verticalPixel * 2),
+                        EdgeInsets.symmetric(horizontal: verticalPixel * 0),
                     child: null,
                   ),
                 ), //Dropdown menu
@@ -603,7 +580,6 @@ class _PriceScreenState extends State<PriceScreen> {
                     setState(() {
                       data = data;
                     });
-                    print('done');
 
                   },
                   child: Container(
