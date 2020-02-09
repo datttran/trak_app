@@ -64,12 +64,14 @@ class _PriceScreenState extends State<PriceScreen> {
     Timer.periodic(Duration(seconds: 60), (Timer t) => getTime());
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setEnabledSystemUIOverlays([]);
+
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
 //      appBar: GradientAppBar(
 //
 //        elevation: 0,
@@ -102,6 +104,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
       body: ListView(
         children: <Widget>[
+          SizedBox(height: verticalPixel*1,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: verticalPixel * 2),
             child: Row(
@@ -397,25 +400,21 @@ class _PriceScreenState extends State<PriceScreen> {
             height: verticalPixel * 10,
 
             width: double.infinity,
+
             //color: Colors.black,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                RaisedButton(
+                GestureDetector(
+                  onTap: (){
+                    showCupertinoModalPopup(
+                        context: context,
+                        builder: (BuildContext context) {
+                          FixedExtentScrollController scoldController = FixedExtentScrollController(initialItem: currencyOptions.indexOf(selectedCurrency));
 
+                          return Container(
 
-
-                  onPressed: () {
-
-
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (BuildContext context) {
-                            FixedExtentScrollController scoldController = FixedExtentScrollController(initialItem: currencyOptions.indexOf(selectedCurrency));
-                            
-                            return Container(
-
-                            height: verticalPixel*19,
+                            height: verticalPixel*25,
                             child: CupertinoPicker(
                               scrollController: scoldController,
                               looping: true,
@@ -423,7 +422,10 @@ class _PriceScreenState extends State<PriceScreen> {
 
                               backgroundColor: Colors.grey[200],
                               onSelectedItemChanged: (value){
-                                selectedCurrency = currencyOptions[value];
+
+                                setState(() {
+                                  selectedCurrency = currencyOptions[value];
+                                });
 
 
 
@@ -431,7 +433,8 @@ class _PriceScreenState extends State<PriceScreen> {
 
 
 
-                                  getDataUpdate(currencyOptions[value]);
+
+                                getDataUpdate(currencyOptions[value]);
 
 
 
@@ -439,7 +442,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
 
 
-                                  //print(selectedCurrency + currencies[0].price);
+                                //print(selectedCurrency + currencies[0].price);
 
 
 
@@ -450,16 +453,14 @@ class _PriceScreenState extends State<PriceScreen> {
                               },
                               children: <Widget>[
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                Center(
+
                                   child: Text('USD'),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                Center(
                                   child: Text('EUR'),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                Center(
                                   child: Text('GBP'),
                                 ),
 
@@ -468,15 +469,126 @@ class _PriceScreenState extends State<PriceScreen> {
                               itemExtent: verticalPixel*6,
                             ),
                           );});
-                    
-
                   },
-                child: Text(selectedCurrency),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[400].withOpacity(1),
+                          blurRadius: 3,
+                          spreadRadius: 5,
+                          offset: Offset(1, 1),
+                        ),
+                        BoxShadow(
+                          color: Colors.grey[100],
+                          blurRadius: 5,
+                          spreadRadius: 5,
+                          offset: Offset(-1, -1),
+                        )
+                      ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.grey[50].withOpacity(.8),
+                            Colors.grey[200].withOpacity(.9),
+                          ],
+                          stops: [
+                            .1,
+                            .9
+                          ]),
+                      //color: Colors.black,
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: verticalPixel*2, top: 2, bottom: 2, right: 1),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(' Price in $selectedCurrency   ', style: TextStyle(color: Colors.grey[700], fontWeight: FontWeight.w100, fontFamily: 'Ubuntu'),),
+                          Icon(Icons.arrow_drop_down)
+                        ],
+                      ),
+                    ),
                   ),
                 ),
+
+//                RaisedButton(
+//
+//
+//
+//                  onPressed: () {
+//
+//
+//                      showCupertinoModalPopup(
+//                          context: context,
+//                          builder: (BuildContext context) {
+//                            FixedExtentScrollController scoldController = FixedExtentScrollController(initialItem: currencyOptions.indexOf(selectedCurrency));
+//
+//                            return Container(
+//
+//                            height: verticalPixel*19,
+//                            child: CupertinoPicker(
+//                              scrollController: scoldController,
+//                              looping: true,
+//                              useMagnifier: true,
+//
+//                              backgroundColor: Colors.grey[200],
+//                              onSelectedItemChanged: (value){
+//                                selectedCurrency = currencyOptions[value];
+//
+//
+//
+//
+//
+//
+//
+//                                  getDataUpdate(currencyOptions[value]);
+//
+//
+//
+//
+//
+//
+//
+//                                  //print(selectedCurrency + currencies[0].price);
+//
+//
+//
+//
+//
+//
+//
+//                              },
+//                              children: <Widget>[
+//
+//                                Padding(
+//                                  padding: const EdgeInsets.symmetric(vertical: 10),
+//                                  child: Text('USD'),
+//                                ),
+//                                Padding(
+//                                  padding: const EdgeInsets.symmetric(vertical: 10),
+//                                  child: Text('EUR'),
+//                                ),
+//                                Padding(
+//                                  padding: const EdgeInsets.symmetric(vertical: 10),
+//                                  child: Text('GBP'),
+//                                ),
+//
+//
+//                              ],
+//                              itemExtent: verticalPixel*6,
+//                            ),
+//                          );}); //MENU
+//
+//
+//                  },
+//                child: Text(selectedCurrency),
+//                  shape: RoundedRectangleBorder(
+//                      borderRadius: new BorderRadius.circular(20.0),
+//
+//                  ),
+//                ),
                 Theme(
                   data:
                       Theme.of(context).copyWith(brightness: Brightness.light),

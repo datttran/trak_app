@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trak/pages/loading_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:trak/pages/price_screen.dart';
 
 //import 'package:device_simulator/device_simulator.dart';
 
