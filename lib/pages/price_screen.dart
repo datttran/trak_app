@@ -54,7 +54,14 @@ class _PriceScreenState extends State<PriceScreen> {
             child: buildContainer(
                 child: currencies[i].buildCard(),
                 colors: color[onoff[i]])),
-      buildEmptyCard(),
+
+      GestureDetector(
+        onTap: (){
+          print('tap');
+          //TODO: insert a SimpleDialog here for user to select with Cryto card to display.
+        },
+
+          child: buildContainer(child: Icon(Icons.add, size: verticalPixel*4,), colors: Colors.redAccent))
     ];
   }
   @override
