@@ -13,7 +13,8 @@ List prices = [];
 var dataUpdate;
 String keyIds = 'BTC,ETH,XMR,USDT,EOS,LTC,DASH';
 String converts = 'USD,EUR,GBP';
-List<String> ids = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
+List<String> idShowList = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
+List<String> fullIdList = ['BTC', 'ETH','XMR','USDT','EOS','LTC','DASH' ];
 List<Crypto> currencies = [];
 List cards = [];
 final loadingAnimation = SpinKitFadingCube(
@@ -53,8 +54,8 @@ final List<double> stops = <double>[0 , 0.5, 1];
 
 ZoomPanBehavior zoomingBehavior = ZoomPanBehavior(
 enablePinching: true, zoomMode: ZoomMode.x, enablePanning: true);
-String labelFormat = labelMap[ids[0]] ;
+String labelFormat = labelMap[idShowList[0]] ;
 
 Map labelMap = {'BTC' : '\${value}K' , 'ETH': '\${value}','XMR': '\${value}','USDT': '\${value}','EOS': '\${value}','LTC': '\${value}','DASH' : '\${value}'};
 
-
+List onList=[];

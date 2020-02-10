@@ -30,15 +30,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
   void getData() async{
+
     Response response = await get('https://api.nomics.com/v1/currencies/ticker?key=$apiKey&ids=$keyIds&interval=1h,1d,30d');
-
-    data = jsonDecode(response.body);
-
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body);
+    }
+    else{
+      print(response.statusCode);
+    }
 
     //print(data);
-    for(String id in ids){
+    for(String id in idShowList){
       Crypto currency = new Crypto(id : id);
-      int num = ids.indexOf(id);
+      int num = idShowList.indexOf(id);
 
 
       currency.getInfo(num);

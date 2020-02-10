@@ -5,7 +5,8 @@ import 'package:trak/buildMethods/methods.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trak/classes/Price.dart';
 import 'package:trak/classes/cryto.dart';
-import 'package:trak/pages/currencypicker.dart';
+import 'package:trak/pages/addcard.dart';
+
 import '../buildMethods/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,7 +50,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 showingID = currencies[showing].idToName();
                 showingRank = currencies[showing].showRank();
               });
-              checkLabelFormat(ids[i]);
+              checkLabelFormat(idShowList[i]);
             },
             child: buildContainer(
                 child: currencies[i].buildCard(),
@@ -57,8 +58,9 @@ class _PriceScreenState extends State<PriceScreen> {
 
       GestureDetector(
         onTap: (){
-          print('tap');
-          //TODO: insert a SimpleDialog here for user to select with Cryto card to display.
+
+          showCupertinoModalPopup(context: context, builder: (BuildContext context) => AddCard());
+
         },
 
           child: buildContainer(child: Icon(Icons.add, size: verticalPixel*4,), colors: Colors.redAccent))
