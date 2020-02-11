@@ -17,15 +17,16 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 - Add auto format axis label base on data.
 - Add crosshair tool to the graph.
 - Update UI.
+
 ## Known issues
-- The animation when changing between graphs stop working after zoom in.
-- FPS drops when using crosshair tool.
+- App can't start without internet connection since the data is imported using API everytime the app restart.
 
 ## Todo
 
-- [ ] Use local currency icons instead the network icons from Nomics.
-- [ ] Add "Add card" card to add more cryptocurrency to the watch list.
+- [ ] Use local currency icons instead the network icons from Nomics. <removed>
+- [x] Add "Add card" card to add more cryptocurrency to the watch list.
 - [x] Style the graph to match the soft UI theme.
-- [ ] Add convert function.
+- [x] Add convert function.
 - [ ] Add user portfolio.
+
 
