@@ -25,17 +25,23 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  _getRequests()async{
+
+  }
   Timer timer;
+
   String time = Day().format('hh:mm').toString();
   void getTime() {
     setState(() {
       time = Day().format('hh:mm').toString();
     });
   }
+
+
   List xCards(){
 
     return <Widget>[
-      for (int i = 0; i < currencies.length; i += 1)
+      for (int i = 0; i < showCurrency.length; i += 1)
         GestureDetector(
             onTap: () {
               setState(() {
@@ -50,16 +56,16 @@ class _PriceScreenState extends State<PriceScreen> {
                 showingID = currencies[showing].idToName();
                 showingRank = currencies[showing].showRank();
               });
-              checkLabelFormat(idShowList[i]);
+              checkLabelFormat(fullList[i]);
             },
             child: buildContainer(
-                child: currencies[i].buildCard(),
+                child: showCurrency[i].buildCard(),
                 colors: color[onoff[i]])),
 
       GestureDetector(
-        onTap: (){
+        onTap: () async{
 
-          showCupertinoModalPopup(context: context, builder: (BuildContext context) => AddCard());
+          await showCupertinoModalPopup(context: context, builder: (BuildContext context) => AddCard()).then((_)=> setState((){}));
 
         },
 
@@ -73,6 +79,9 @@ class _PriceScreenState extends State<PriceScreen> {
     Timer.periodic(Duration(seconds: 60), (Timer t) => getTime());
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setEnabledSystemUIOverlays([]);
+    checkList();
+    print('this is show' + showCurrency.toString());
+    print('this is list currency' + currencies.toString());
 
   }
 
@@ -654,7 +663,8 @@ class _PriceScreenState extends State<PriceScreen> {
 //             //Text(sparkLineData[0]['timestamps'][0] + sparkLineData[0]['prices'][0]),
 //          ) // Test Area
           // CRYPTO TYPE
-        ],
+
+          ],
       ),
     );
   }

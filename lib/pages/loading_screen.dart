@@ -40,9 +40,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
 
     //print(data);
-    for(String id in idShowList){
+    for(String id in fullList){
       Crypto currency = new Crypto(id : id);
-      int num = idShowList.indexOf(id);
+      int num = fullList.indexOf(id);
 
 
       currency.getInfo(num);
@@ -71,6 +71,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
     buildDataTables();
     getData();
+
   }
 
 

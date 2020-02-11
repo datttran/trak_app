@@ -13,6 +13,8 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
 
+
+
   addCheck(coin){
     if(currencies.contains(coin)){
       return CupertinoSwitch(
@@ -20,6 +22,15 @@ class _AddCardState extends State<AddCard> {
         onChanged: (bool value) {
           setState(() {
             coin.switchValue = value;
+            if(value == true ){
+              showCurrency.add(coin);
+
+
+            }
+            else{
+              showCurrency.remove(coin);
+
+            }
           });
         },
 
@@ -31,6 +42,7 @@ class _AddCardState extends State<AddCard> {
     }
   }
   @override
+
   Widget build(BuildContext context) {
     return Center(
       child: Container(
@@ -39,10 +51,10 @@ class _AddCardState extends State<AddCard> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomCenter,
-              colors: [Colors.grey[200], Colors.white],
+              colors: [Colors.grey[200], Colors.grey[50]],
               stops: [0,1]),
         ),
-        height: verticalPixel*60,
+        height: verticalPixel*63,
         width: horizontalPixel*84,
 
         child: Column(
@@ -53,10 +65,10 @@ class _AddCardState extends State<AddCard> {
                 color: Colors.transparent,
                 child: Padding(
                   padding: EdgeInsets.only(left: verticalPixel*2.3, top: verticalPixel),
-                  child: Text('+ TRAK LIST', style: TextStyle(fontSize: verticalPixel*2.3, fontFamily: 'Righteous' , color: Colors.black),),
+                  child: Text('+ TRAK LIST', style: TextStyle(fontSize: verticalPixel*2.3, fontFamily: 'Righteous' , color: Colors.black.withOpacity(.7)),),
                 )),
             Container(
-              height: verticalPixel*50,
+              height: verticalPixel*47,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: verticalPixel*1.5, vertical: verticalPixel*1.5),
                 child: MediaQuery.removePadding(
@@ -80,6 +92,7 @@ class _AddCardState extends State<AddCard> {
             ),
             GestureDetector(
               onTap: () {
+                Navigator.pop(context, true);
 
 
               },
@@ -100,7 +113,7 @@ class _AddCardState extends State<AddCard> {
                           offset: Offset(1, 1),
                         ),
                         BoxShadow(
-                          color: Colors.grey[100],
+                          color: Colors.grey[50],
                           blurRadius: 5,
                           spreadRadius: 5,
                           offset: Offset(-1, -1),
@@ -110,7 +123,7 @@ class _AddCardState extends State<AddCard> {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Colors.white.withOpacity(.8),
+                            Colors.white,
                             Colors.grey[100].withOpacity(.9),
                           ],
                           stops: [

@@ -8,7 +8,7 @@ import '../buildMethods/methods.dart';
 
 
 class Crypto {
-  bool switchValue = true;
+  bool switchValue;
   String rank;
   String name;
   String id;

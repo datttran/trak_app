@@ -15,17 +15,19 @@ getDataUpdate(String selectedCurrency) async{
 
   data = jsonDecode(response.body);
 
-  for (int i = 0; i < idShowList.length; i += 1){
+  for (int i = 0; i < showList.length; i += 1){
 
 
-    Crypto holder = new Crypto(id: idShowList[i]);
+    Crypto holder = new Crypto(id: showList[i]);
     holder.getInfo(i);
 
-    currencies[i]= holder;
+    showCurrency[i]= holder;
     //print(holder.name +  holder.price + holder.convert);
 
 
   }
+
+
 
 
 
@@ -130,9 +132,9 @@ getSparkLineData(id, currentTime) async{
 }
 List wholeDataTable = [];
 buildDataTables() async{
-  for (int i = 0; i < idShowList.length; i ++){
+  for (int i = 0; i < fullList.length; i ++){
     wholeDataTable.add(null);
-    wholeDataTable[i] = await getSparkLineData(idShowList[i], currentTime);
+    wholeDataTable[i] = await getSparkLineData(fullList[i], currentTime);
 
 
   }
@@ -146,9 +148,11 @@ void checkLabelFormat(String id){
 
 
 checkList(){
-  for (int i = 0; i < idShowList.length; i ++){
-    if(idShowList.contains(currencies[i].id)){
+  for (int i = 0; i < currencies.length; i ++){
+    if(showList.contains(currencies[i].id)){
       currencies[i].switchValue = true;
+      showCurrency.add(currencies[i]);
+
     }
     else{
       currencies[i].switchValue = false;
