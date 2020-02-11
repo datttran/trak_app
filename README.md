@@ -28,5 +28,6 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 - [x] Style the graph to match the soft UI theme.
 - [x] Add convert function.
 - [ ] Add user portfolio.
+- [ ] Clean the code after finish the app. 
 
 
