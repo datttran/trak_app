@@ -20,6 +20,8 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 
 ## Known issues
 - App can't start without internet connection since the data is imported using API everytime the app restart.
+## Data Provider
+- Martket data is coming from [Nomics API](https://docs.nomics.com/)
 
 ## Todo
 
