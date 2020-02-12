@@ -1,8 +1,10 @@
 # **Trak**
+![](https://img.shields.io/badge/status-stable-green)
 
 A Cryptocurrency price tracker app build with Flutter and Dart.
 
 ![](images/image.png)
+
 
 ## Getting Started
 
