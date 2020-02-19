@@ -27,7 +27,7 @@ A Cryptocurrency price tracker app build with Flutter and Dart.
 
 ## Todo
 
-- [ ] Use local currency icons instead the network icons from Nomics. <removed>
+- [x] Use local currency icons instead the network icons from Nomics. <removed>
 - [x] ~~Add "Add card" card to add more cryptocurrency to the watch list.~~
 - [x] ~~Style the graph to match the soft UI theme.~~
 - [x] ~~Add convert function.~~
